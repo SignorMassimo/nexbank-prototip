@@ -56,6 +56,10 @@ public class CardController {
         return new BaseResponse(cardService.cardRepo.findByCardNumber(card.getCardNumber()), true, "");
     }
 
+    @PostMapping("/delete")
+    public BaseResponse delete(@RequestBody Card card) {
+        return new BaseResponse(null, this.cardService.delete(card.getId()), "");
+    }
 
     /* @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

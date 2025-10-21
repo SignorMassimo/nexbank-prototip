@@ -27,4 +27,13 @@ public class CardService {
     public Card save(Card card) {
         return this.cardRepo.save(card);
     }
+
+    public boolean delete(Long cardId) {
+        Card card = this.findById(cardId);
+        if (card == null) {
+            return false;
+        }
+        this.cardRepo.delete(card);
+        return true;
+    }
 }

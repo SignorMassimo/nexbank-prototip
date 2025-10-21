@@ -8,4 +8,6 @@ public interface CardRepository extends JpaRepository<Card, Object> {
     public List<Card> findAllByUserId(String userId);
 
     public Card findByCardNumber(String cardNumber);
+
+    // public Card deleteByCardId(Long id);
 }
