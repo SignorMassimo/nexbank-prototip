@@ -38,8 +38,8 @@ public class TransactionController {
         toCard.setBalance(toCard.getBalance() + data.getAmount());
         this.cardService.save(fromCard);
         this.cardService.save(toCard);
-        data.setFromUserId(Long.parseLong(fromCard.getUserId()));
-        data.setToUserId(Long.parseLong(toCard.getUserId()));
+        data.setFromUserId(fromCard.getUser().getId());
+        data.setToUserId(toCard.getUser().getId());
         Transaction newTransaction = this.transactionService.transactionRepo.save(data);
         return new BaseResponse(newTransaction, true, "Transaction Create Successfull");
     }

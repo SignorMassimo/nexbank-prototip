@@ -1,37 +1,51 @@
 package com.zexson.signor_p.UserModule;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.zexson.signor_p.helper_servers.TokenService;
+import com.zexson.signor_p.DTO.UserCreateDTO;
+import com.zexson.signor_p.untilities.TokenService;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
+
+    @Autowired
     UserRepository userRepo;
+    @Autowired
     TokenService tokenService;
 
-    public UserService(UserRepository userRepo, TokenService tokenService) {
-        this.userRepo = userRepo;
-        this.tokenService = tokenService;
-    }
-
-    public List<User> getAll(){
+    @Override
+    public List<User> getAll() {
         return this.userRepo.findAll();
     }
 
-    public User create(User user) {
-        User existsUser = this.userRepo.findByEmail(user.getEmail());
-        if (existsUser != null)
+    @Override
+    public User create(UserCreateDTO userDTO) {
+        User existsUser = this.userRepo.findByEmail(userDTO.getEmail());
+        if (existsUser != null) {
             throw new IllegalArgumentException("Email must be unique");
-        user.setToken(tokenService.generateToken(30));
-        this.userRepo.save(user);
-        return user;
+        }
+        User newUser = new User();
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setUsername(userDTO.getUsername());
+        newUser.setPassword(userDTO.getPassword());
+        newUser.setToken(tokenService.generateToken(30));
+        this.userRepo.save(newUser);
+        return existsUser;
     }
 
+    @Override
     public User findByEmail(String email) {
         return this.userRepo.findByEmail(email);
     }
 
-    public User findByEmailAndPassword(String email,String password){
+    @Override
+    public User findByEmailAndPassword(String email, String password) {
         return this.userRepo.findByEmailAndPassword(email, password);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return this.userRepo.findById(id).orElse(null);
     }
 }

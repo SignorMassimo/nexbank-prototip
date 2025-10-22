@@ -14,7 +14,7 @@ public class CorsConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4321", "http://192.168.100.157:4321", "https://d986dd8ffbaa.ngrok-free.app")
+                        .allowedOrigins("http://localhost:4321", "http://192.168.100.157:4321", "https://f238217cb58c.ngrok-free.app")
                         .allowedMethods("POST", "GET", "PUT")
                         .allowCredentials(true);
             }
