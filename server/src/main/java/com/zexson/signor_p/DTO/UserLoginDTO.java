@@ -11,9 +11,9 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserLoginDTO {
 
-    @NotBlank(message = "Email is mandatory")
-    @Email(message = "Email should be valid")
+    @NotBlank
+    @Email
     private String email;
-    @NotBlank(message = "Password is mandatory")
+    @NotBlank
     private String password;
 }

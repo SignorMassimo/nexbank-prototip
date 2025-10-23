@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserByEmailDTO {
+public class CardByNumberDTO {
 
     @NotBlank
-    private String email;
+    private String cardNumber;
 }

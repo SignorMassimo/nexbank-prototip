@@ -10,10 +10,10 @@ import lombok.Setter;
 @Setter
 public class UserCreateDTO {
 
-    @NotBlank(message = "Username is mandatory")
+    @NotBlank
     private String username;
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank
     private String email;
-    @NotBlank(message = "Password is mandatory")
+    @NotBlank
     private String password;
 }

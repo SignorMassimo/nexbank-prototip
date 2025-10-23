@@ -3,6 +3,7 @@ package com.zexson.signor_p.CardModule;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.zexson.signor_p.DTO.CardBalanceDTO;
 import com.zexson.signor_p.DTO.CardCreateDTO;
 import com.zexson.signor_p.UserModule.UserService;
 import jakarta.transaction.Transactional;
@@ -48,7 +49,7 @@ public class CardService implements ICardService {
 
     @Override
     @Transactional
-    public boolean transferBalance(Card card, Long cardId) {
+    public boolean transferBalance(CardBalanceDTO card, Long cardId) {
         Card existsCard = this.cardRepo.findById(cardId).orElse(null);
         if (existsCard == null) {
             return false;

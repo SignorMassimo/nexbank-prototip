@@ -4,18 +4,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.zexson.signor_p.Base.BaseResponse;
+import com.zexson.signor_p.DTO.ByIdDTO;
 import com.zexson.signor_p.DTO.UserByEmailDTO;
-import com.zexson.signor_p.DTO.UserByIdDTO;
 import com.zexson.signor_p.DTO.UserCreateDTO;
 import com.zexson.signor_p.DTO.UserLoginDTO;
 import com.zexson.signor_p.Response.CreateUserResponse;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
@@ -27,6 +29,12 @@ public class UserController implements IUserController {
     UserService userService;
     @Autowired
     HttpServletResponse res;
+
+    @GetMapping("/")
+    public String get(HttpServletRequest req) {
+        String name = (String) req.getAttribute("name");
+        return "Hello " + name;
+    }
 
     @PostMapping("/")
     @Override
@@ -50,7 +58,7 @@ public class UserController implements IUserController {
 
     @PostMapping("/by-id")
     @Override
-    public BaseResponse byId(@Valid @RequestBody UserByIdDTO user) {
+    public BaseResponse byId(@Valid @RequestBody ByIdDTO user) {
         return new BaseResponse(this.userService.userRepo.findById(user.getId()).orElse(null), true, "");
     }
 
