@@ -1,7 +1,6 @@
 package com.zexson.signor_p.Security;
 
 import java.io.IOException;
-import org.springframework.context.annotation.Configuration;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +9,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Configuration
+// @Configuration
 public class LoggingFilter implements Filter {
 
     @Override
